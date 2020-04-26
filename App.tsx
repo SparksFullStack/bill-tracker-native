@@ -1,21 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import BillList from './BillList';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Bill Tracker!</Text>
+    <View>
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Bill Tracker!</Text>
+      </View>
+      <BillList />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#fff',
+  headerContainer: {
+    display: 'flex',
     alignItems: 'center',
-    // justifyContent: 'center',
-    marginTop: 30
+    marginTop: 40
   },
   header: {
     fontSize: 36,
