@@ -2,7 +2,9 @@ import React from 'react'
 import { View, Text, FlatList, StyleSheet, Alert } from 'react-native'
 import axios from 'axios'
 import { SERVER_BASE_URL, IBill, LOCAL_BASE_URL } from '../constants'
-import BillCard from './BillCard'
+import { Agenda, Calendar, DateObject } from 'react-native-calendars'
+import { Container, Content, FooterTab, Footer, Button } from 'native-base'
+import { Link } from 'react-router-native'
 
 const styles = StyleSheet.create({
     billList: {
@@ -13,13 +15,15 @@ const styles = StyleSheet.create({
     }
 })
 
-interface BillListState {
-    bills: IBill[]
+interface BillCalendarState {
+    bills: IBill[],
+    isCreateBillModalOpen: boolean
 }
 
-class BillList extends React.Component<{}, BillListState> {
+class BillCalendar extends React.Component<{}, BillCalendarState> {
     state = {
-        bills: []
+        bills: [],
+        isCreateBillModalOpen: true
     }
     componentDidMount() {
         this.getAllBills()
@@ -30,17 +34,19 @@ class BillList extends React.Component<{}, BillListState> {
         this.setState({ bills })
     }
 
+    handleDayPress = (day: DateObject) => {
+        // TODO: Fetch all bills for that date
+    }
+
     render() {
         return (
             <View style={styles.billList}>
-                <FlatList
-                    data={this.state.bills}
-                    renderItem={({item: bill}) => <BillCard bill={bill} />}
-                    keyExtractor={(item, index) => index.toString()}
+                <Calendar 
+                    onDayPress={this.handleDayPress}
                 />
             </View>
         )
     }
 }
 
-export default BillList
+export default BillCalendar

@@ -1,14 +1,15 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 import { IBill } from '../constants'
-import { Card } from 'react-native-elements'
+import { Card } from 'native-base'
+import moment from 'moment'
 
 const styles = StyleSheet.create({
     prefaceText: {
         fontWeight: 'bold'
     },
     subjectText: {
-        marginLeft: '10px'
+        marginLeft: 10
     }
 })
 
@@ -17,18 +18,10 @@ type BillCardProps = {
 }
 
 const BillCard = ({ bill }: BillCardProps) => {
-    const formatDate = () => {
-        const newDate = new Date(bill.dueDate)
-        console.log('dates', newDate, bill.dueDate)
-        console.log('month', newDate.getMonth(), newDate.getUTCMonth())
-        return `${newDate.getMonth() + 1}/${newDate.getDate()}/${newDate.getFullYear()}`
-    }
-
+    const formatDate = () => moment(bill.dueDate).format('MM/DD/YYYY')
 
     return (
-       <Card
-        title={bill.name}
-       >
+       <Card>
            <Text>
                <Text style={styles.prefaceText}>Amount: </Text>
                <Text style={styles.subjectText}>  ${bill.totalAmount}</Text>

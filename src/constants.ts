@@ -1,6 +1,6 @@
 // TODO: Convert to ENV
 export const SERVER_BASE_URL = 'https://bills-tracker-server.herokuapp.com/bills'
-export const LOCAL_BASE_URL = 'http://localhost:3001/bills'
+export const LOCAL_BASE_URL = 'http://192.168.1.237:3001/bills'
 
 export enum PaymentMethods {
     AUTO_WITHDRAWAL = 'AUTO_WITHDRAWAL',
@@ -22,6 +22,11 @@ export enum PaymentCategories {
     GIFTS = 'GIFTS',
     CLOTHING = 'CLOTHING',
     OTHER = 'OTHER'
+}
+
+export enum ActiveTab {
+    CALENDAR = 'CALENDAR',
+    LIST = 'LIST'
 }
 
 export interface IBill {
