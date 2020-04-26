@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import axios from 'axios'
-import { SERVER_BASE_URL, IBill, LOCAL_BASE_URL } from './constants'
+import { SERVER_BASE_URL, IBill, LOCAL_BASE_URL } from '../constants'
 import BillCard from './BillCard'
 
 const styles = StyleSheet.create({

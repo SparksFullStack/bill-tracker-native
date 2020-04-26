@@ -1,6 +1,6 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import BillList from './BillList';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import BillList from './src/components/BillList'
 
 export default function App() {
   return (
@@ -10,7 +10,7 @@ export default function App() {
       </View>
       <BillList />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: "200"
   }
-});
+})

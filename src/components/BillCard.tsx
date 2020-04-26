@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
-import { IBill } from './constants'
+import { IBill } from '../constants'
 import { Card } from 'react-native-elements'
 
 const styles = StyleSheet.create({
