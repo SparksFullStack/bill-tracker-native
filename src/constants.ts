@@ -24,12 +24,14 @@ export enum PaymentCategories {
     OTHER = 'OTHER'
 }
 
-export enum ActiveTab {
-    CALENDAR = 'CALENDAR',
-    LIST = 'LIST'
+export enum NavigatorMap {
+    CALENDAR = 'Calendar',
+    LIST = 'List',
+    HOME = 'Home'
 }
 
 export interface IBill {
+    _id: string,
     name: string
     company: string
     dueDate: Date | string

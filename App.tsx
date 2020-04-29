@@ -1,75 +1,37 @@
 import React from 'react'
-import { StyleSheet, Text, View, AppRegistry } from 'react-native'
-import { NativeRouter, Route } from 'react-router-native'
-import BillCalendar from './src/components/BillCalendar'
-import FooterButtons from './src/components/FooterButtons'
+// import { createStackNavigator } from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import Main from './src/Main'
+// import BillCalendar from './src/components/BillCalendar'
+import AddBill from './src/components/AddBill'
+// import BillList from './src/components/BillList'
 
-import { AppLoading } from 'expo';
-// import { Container, Text } from 'native-base';
-import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
-import { Container, Content } from 'native-base'
-import { ActiveTab } from './src/constants'
-
-export default class App extends React.Component {
-  state = {
-    isReady: false,
-    activeTab: ActiveTab.CALENDAR
-  }
-
-  async componentDidMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
-    this.setState({ isReady: true });
-  }
-
-  updateActiveTab = (newActiveTab: ActiveTab) => this.setState({ activeTab: newActiveTab })
-
-  render() {
-    if (!this.state.isReady) {
-      return <AppLoading />;
-    }
-
-    return (
-      <NativeRouter>
-        <Container>
-          <Content>
-            <View style={styles.headerContainer}>
-              <Text style={styles.header}>Bill Tracker!</Text>
-            </View>
-            <Route exact path='/'>
-              <View style={styles.headerContainer}>
-                <Text style={styles.header}>Welcome to bill tracker!</Text>    
-              </View>
-            </Route>
-            <Route path='/calendar'>
-              <BillCalendar />
-            </Route>
-          </Content>
-
-          <FooterButtons 
-            activeTab={this.state.activeTab} 
-            updateActiveTab={this.updateActiveTab}  
-          />
-        </Container>
-      </NativeRouter>
-    )
-  }
+export enum NavigatorScreens {
+  MAIN = 'Main',
+  CALENDAR = 'Calendar',
+  LIST = 'List',
+  ADD_BILL = 'Add Bill'
 }
 
-const styles = StyleSheet.create({
-  headerContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: 80
-  },
-  header: {
-    fontSize: 36,
-    fontWeight: "200"
-  }
-})
+export type RootStackParamList = {
+  [NavigatorScreens.MAIN]: {}
+  [NavigatorScreens.CALENDAR]: {}
+  [NavigatorScreens.LIST]: {}
+  [NavigatorScreens.ADD_BILL]: {}
+}
 
-AppRegistry.registerComponent('BillTracker', () => App);
+const { Navigator, Screen } = createBottomTabNavigator<RootStackParamList>()
+
+const App = () => (
+  <NavigationContainer>
+    <Navigator tabBarOptions={{ tabStyle: { justifyContent: 'center' } }}>
+      <Screen name={NavigatorScreens.MAIN} component={Main} />
+      {/* <Screen name={NavigatorScreens.CALENDAR} component={BillCalendar} /> */}
+      <Screen name={NavigatorScreens.ADD_BILL} component={AddBill} />
+      {/* <Screen name={NavigatorScreens.LIST} component={BillList} /> */}
+    </Navigator>
+  </NavigationContainer>
+)
+
+export default App

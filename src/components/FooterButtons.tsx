@@ -1,30 +1,36 @@
 import React from 'react'
 import { Text, FooterTab, Footer, Button } from 'native-base'
-import { Link } from 'react-router-native'
-import { ActiveTab } from '../constants'
+import { NavigatorMap } from '../constants'
 
 type FooterButtonsProps = {
-    activeTab: ActiveTab
-    updateActiveTab: (newActiveTab: ActiveTab) => void
+    activeTab?: NavigatorMap
+    updateActiveTab?: (newActiveTab: NavigatorMap) => void
+    navigate: (path: NavigatorMap | string) => void
 }
 
-const FooterButtons = ({ activeTab, updateActiveTab }: FooterButtonsProps) => {
+const FooterButtons = ({ activeTab, updateActiveTab, navigate }: FooterButtonsProps) => {
+    console.log('navigate', navigate)
     return (
         <Footer>
             <FooterTab>
-                <Button onClick={() => updateActiveTab(ActiveTab.CALENDAR)} active={activeTab === ActiveTab.CALENDAR}>
-                    <Link to='/calendar'>
-                        <Text>Calendar</Text>
-                    </Link>
+                <Button 
+                    onPress={() => navigate(NavigatorMap.HOME)} 
+                    // active={activeTab === NavigatorMap.CALENDAR}
+                >
+                    <Text>{NavigatorMap.HOME}</Text>
                 </Button>
-                <Button onClick={() => updateActiveTab(ActiveTab.LIST)} active={activeTab === ActiveTab.LIST}>
-                    <Link to='/list'>
-                        <Text>List</Text>
-                    </Link>
+                <Button 
+                    onPress={() => navigate(NavigatorMap.CALENDAR)} 
+                    // active={activeTab === NavigatorMap.CALENDAR}
+                >
+                    <Text>{NavigatorMap.CALENDAR}</Text>
                 </Button>
-                {/* <Button>
-                    <Link to='/'>Add Bill</Link>
-                </Button> */}
+                <Button 
+                    onPress={() => navigate(NavigatorMap.LIST)} 
+                    // active={activeTab === NavigatorMap.LIST}
+                >
+                    <Text>{NavigatorMap.LIST}</Text>
+                </Button>
             </FooterTab>
         </Footer>
     )
