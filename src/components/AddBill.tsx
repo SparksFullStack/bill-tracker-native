@@ -1,9 +1,8 @@
 import React from 'react'
-import { StyleSheet, Alert, Keyboard } from 'react-native'
-import { Header, Container, Content, Form, Item, Input, View, Text, Body, Title, Button } from 'native-base'
 import axios from 'axios'
-import { SERVER_BASE_URL } from '../constants'
-import { NavigatorScreens } from '../../App'
+import { StyleSheet, Alert, Keyboard } from 'react-native'
+import { Header, Container, Content, Form, Item, Input, View, Text, Body, Title, Button, Picker } from 'native-base'
+import { SERVER_BASE_URL, NavigatorScreens, PaymentMethods, ReadablePaymentMethods } from '../constants'
 
 const styles = StyleSheet.create({
     form: {
@@ -14,6 +13,10 @@ const styles = StyleSheet.create({
     },
     item: {
         marginRight: 15
+    },
+    picker: {
+        marginRight: 15,
+        paddingLeft: 0
     },
     button: {
         margin: 15
@@ -26,7 +29,7 @@ const AddBill = ({ navigation, route }: any) => {
     const [company, setCompany] = React.useState<string>()
     const [dueDate, setDueDate] = React.useState<string>()
     const [totalAmount, setTotalAmount] = React.useState<string>()
-    const [paymentMethod, setPaymentMethod] = React.useState<string>()
+    const [paymentMethod, setPaymentMethod] = React.useState<PaymentMethods>(PaymentMethods.AUTO_WITHDRAWAL)
 
     const handleAddBill = async () => {
         const serverPayload = {
@@ -47,7 +50,7 @@ const AddBill = ({ navigation, route }: any) => {
         setCompany('')
         setDueDate('')
         setTotalAmount('')
-        setPaymentMethod('')
+        setPaymentMethod(PaymentMethods.AUTO_WITHDRAWAL)
         navigation.navigate(NavigatorScreens.MAIN)
     }
 
@@ -70,10 +73,21 @@ const AddBill = ({ navigation, route }: any) => {
                         <Input onChangeText={(text) => setDueDate(text)} placeholder="Due Date" />
                     </Item>
                     <Item style={styles.item}>
-                        <Input onChangeText={(text) => setTotalAmount(text)} placeholder="Total Amount" />
+                        <Input keyboardType='number-pad' onChangeText={(text) => setTotalAmount(text)} placeholder="Total Amount" />
                     </Item>
-                    <Item style={styles.item}>
-                        <Input onChangeText={(text) => setPaymentMethod(text)} placeholder="Payment Method" />
+                    <Item style={styles.picker}>
+                        <Picker
+                            note
+                            mode='dropdown'
+                            selectedValue={paymentMethod}
+                            onValueChange={(newValue) => setPaymentMethod(newValue)}
+                            placeholder="Add a Payment Method"
+                        >
+                            <Picker.Item label="Auto Withdrawal" value={PaymentMethods.AUTO_WITHDRAWAL} />
+                            <Picker.Item label="Online" value={PaymentMethods.ONLINE} />
+                            <Picker.Item label="Set Aside" value={PaymentMethods.SET_ASIDE} />
+                            <Picker.Item label="Transfer" value={PaymentMethods.TRANSFER} />
+                        </Picker>
                     </Item>
                     <Button onPress={handleAddBill} style={styles.button}>
                         <Text>Submit</Text>

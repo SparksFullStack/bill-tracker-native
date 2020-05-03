@@ -2,11 +2,25 @@
 export const SERVER_BASE_URL = 'https://bills-tracker-server.herokuapp.com/bills'
 export const LOCAL_BASE_URL = 'http://192.168.1.237:3001/bills'
 
+export enum NavigatorScreens {
+    MAIN = 'Main',
+    CALENDAR = 'Calendar',
+    LIST = 'List',
+    ADD_BILL = 'Add Bill'
+}
+
 export enum PaymentMethods {
     AUTO_WITHDRAWAL = 'AUTO_WITHDRAWAL',
     ONLINE = 'ONLINE',
     SET_ASIDE = 'SET_ASIDE',
     TRANSFER = 'TRANSFER'
+}
+
+export const ReadablePaymentMethods = {
+    AUTO_WITHDRAWAL: 'Auto',
+    ONLINE: 'Online',
+    SET_ASIDE: 'Set Aside',
+    TRANSFER: 'Transfer'
 }
 
 export enum PaymentCategories {

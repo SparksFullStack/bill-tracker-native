@@ -5,14 +5,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import Main from './src/Main'
 // import BillCalendar from './src/components/BillCalendar'
 import AddBill from './src/components/AddBill'
+import { NavigatorScreens } from './src/constants'
 // import BillList from './src/components/BillList'
-
-export enum NavigatorScreens {
-  MAIN = 'Main',
-  CALENDAR = 'Calendar',
-  LIST = 'List',
-  ADD_BILL = 'Add Bill'
-}
 
 export type RootStackParamList = {
   [NavigatorScreens.MAIN]: {}

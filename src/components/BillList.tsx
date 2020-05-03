@@ -8,7 +8,6 @@ import Axios from 'axios'
 const styles = StyleSheet.create({
     billList: {
         width: '90%',
-        // marginHorizontal: 'auto',
         marginLeft: 15,
         marginRight: 15,
         marginTop: 10
@@ -22,14 +21,13 @@ interface BillListState {
 let timeout: any
 
 class BillList extends React.Component<{}, BillListState> {
+    _isMounted = false
+
     state = {
         bills: []
     }
     componentDidMount() {
-        this.getAllBills()
-    }
-
-    componentDidUpdate() {
+        this._isMounted = true
         this.getAllBills()
     }
 
@@ -42,6 +40,10 @@ class BillList extends React.Component<{}, BillListState> {
         await Axios.delete(`${SERVER_BASE_URL}/${billId}`)
         Alert.alert('deleted!')
         this.getAllBills()
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false
     }
 
     render() {

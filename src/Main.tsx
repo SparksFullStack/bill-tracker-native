@@ -43,7 +43,7 @@ export default class Main extends React.Component<{ navigation: any }> {
 
 const styles = StyleSheet.create({
   view: {
-    // backgroundColor: '#fff',
+    paddingTop: 30,
     height: '100%'
   },
   headerContainer: {
