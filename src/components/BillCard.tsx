@@ -34,7 +34,8 @@ type BillCardProps = {
 }
 
 const BillCard = ({ bill, handleDelete }: BillCardProps) => {
-    const dueDate =  moment(bill.dueDate).format('MM/DD/YYYY')
+    // const dueDate =  moment(bill.dueDate).format('MM/DD/YYYY')
+    const dueDate = `${bill.dueDate}st`
     const totalAmount = new Intl.NumberFormat('us-US', { style: 'currency', currency: 'USD' }).format(bill.totalAmount)
     const paymentMethod = ReadablePaymentMethods[bill.paymentMethod]
 

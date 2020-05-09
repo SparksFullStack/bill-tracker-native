@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
         paddingLeft: 0
     },
     button: {
-        margin: 15
+        margin: 15,
+        justifyContent: 'center'
     }
 })
 
@@ -42,7 +43,8 @@ const AddBill = ({ navigation, route }: any) => {
             }
         }
 
-        await axios.post(`${SERVER_BASE_URL}/add-bill`, serverPayload)
+        const response = await axios.post(`${SERVER_BASE_URL}/add-bill`, serverPayload)
+        console.log('response', response)
         Keyboard.dismiss()
         Alert.alert("Saved!")
         
